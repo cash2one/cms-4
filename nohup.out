@@ -1,0 +1,54 @@
+/usr/local/lib/python2.7/dist-packages/mezzanine/utils/conf.py:61: UserWarning: You haven't defined the ALLOWED_HOSTS settings, which Django requires. Will fall back to the domains configured as sites.
+  warn("You haven't defined the ALLOWED_HOSTS settings, which "
+/usr/local/lib/python2.7/dist-packages/mezzanine/utils/conf.py:61: UserWarning: You haven't defined the ALLOWED_HOSTS settings, which Django requires. Will fall back to the domains configured as sites.
+  warn("You haven't defined the ALLOWED_HOSTS settings, which "
+              .....
+          _d^^^^^^^^^b_
+       .d''           ``b.
+     .p'                `q.
+    .d'                   `b.
+   .d'                     `b.   * Mezzanine 4.2.2
+   ::                       ::   * Django 1.10.5
+  ::    M E Z Z A N I N E    ::  * Python 2.7.6
+   ::                       ::   * SQLite 3.8.2
+   `p.                     .q'   * Linux 3.13.0-105-generic
+    `p.                   .q'
+     `b.                 .d'
+       `q..          ..p'
+          ^q........p^
+              ''''
+
+Performing system checks...
+
+System check identified no issues (0 silenced).
+January 24, 2017 - 16:07:57
+Django version 1.10.5, using settings 'cms.settings'
+Starting development server at http://10.154.60.236:8080/
+Quit the server with CONTROL-C.
+/usr/local/lib/python2.7/dist-packages/mezzanine/utils/conf.py:61: UserWarning: You haven't defined the ALLOWED_HOSTS settings, which Django requires. Will fall back to the domains configured as sites.
+  warn("You haven't defined the ALLOWED_HOSTS settings, which "
+/usr/local/lib/python2.7/dist-packages/mezzanine/utils/conf.py:61: UserWarning: You haven't defined the ALLOWED_HOSTS settings, which Django requires. Will fall back to the domains configured as sites.
+  warn("You haven't defined the ALLOWED_HOSTS settings, which "
+              .....
+          _d^^^^^^^^^b_
+       .d''           ``b.
+     .p'                `q.
+    .d'                   `b.
+   .d'                     `b.   * Mezzanine 4.2.2
+   ::                       ::   * Django 1.10.5
+  ::    M E Z Z A N I N E    ::  * Python 2.7.6
+   ::                       ::   * SQLite 3.8.2
+   `p.                     .q'   * Linux 3.13.0-105-generic
+    `p.                   .q'
+     `b.                 .d'
+       `q..          ..p'
+          ^q........p^
+              ''''
+
+Performing system checks...
+
+System check identified no issues (0 silenced).
+January 24, 2017 - 16:08:09
+Django version 1.10.5, using settings 'cms.settings'
+Starting development server at http://10.154.60.236:8080/
+Quit the server with CONTROL-C.
