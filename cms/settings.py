@@ -230,7 +230,7 @@ if DJANGO_VERSION < (1, 9):
 ################
 
 INSTALLED_APPS = (
-    "wechart",
+    "cms.wechart",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
