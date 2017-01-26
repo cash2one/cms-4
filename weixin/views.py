@@ -7,6 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 from wechat_sdk import WechatBasic
 from wechat_sdk.exceptions import ParseError
 from wechat_sdk.messages import TextMessage
+from mezzanine.blog.models import BlogPost, BlogCategory
 
 WECHAT_TOKEN = 'yuxuanyixiao'
 
@@ -121,6 +122,10 @@ def weixin_main(request):
             reply_text = '您要找的教程如下：'
         else :
             reply_text = '敬请期待其他功能.'
+
+            blog_posts = BlogPost.objects.published(for_user=None)
+
+            print 'blog_posts ==== ' , blog_posts
 
         response = wechat_instance.response_text(content=reply_text)
 
