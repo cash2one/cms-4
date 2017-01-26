@@ -119,6 +119,8 @@ def weixin_main(request):
         elif content.endswith('教程'):
 
             reply_text = '您要找的教程如下：'
+        else :
+            reply_text = '敬请期待其他功能.'
 
         response = wechat_instance.response_text(content=reply_text)
 
