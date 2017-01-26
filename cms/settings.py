@@ -249,7 +249,6 @@ INSTALLED_APPS = (
     "mezzanine.twitter",
     # "mezzanine.accounts",
     # "mezzanine.mobile",
-    "wechart",
 )
 
 # List of middleware classes to use. Order is important; in the request phase,
