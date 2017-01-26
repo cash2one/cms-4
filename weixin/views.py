@@ -124,16 +124,16 @@ def weixin_main(request):
 
             reply_text = '您要找的教程如下：'
         else :
-            reply_text = '敬请期待其他功能.\n'
+            reply_text = '最新资讯:\n'
 
             blog_posts = BlogPost.objects.published(for_user=None)[:10]
-
+            var = 0;
             for blog_post in blog_posts :
                 print  blog_post.get_absolute_url
                 print blog_post.title
                 print blog_post.content
-
-                reply_text += u'%s\n' % (blog_post.title)
+                var = var +1;
+                reply_text += u'%d.【<a href="http://www.pyuxuan.cn/blog/%s">%s\n' % (var,blog_post.title,blog_post.title)
         print reply_text
         response = wechat_instance.response_text(content=reply_text)
 
