@@ -230,7 +230,7 @@ if DJANGO_VERSION < (1, 9):
 ################
 
 INSTALLED_APPS = (
-    'testapp',
+    'weixin',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
