@@ -125,7 +125,7 @@ def weixin_main(request):
 
             blog_posts = BlogPost.objects.published(for_user=None)[:10]
 
-            for blog_post in blog_posts.object_list :
+            for blog_post in blog_posts :
                 print  blog_post.get_absolute_url
                 print blog_post.title
                 print blog_post.content
