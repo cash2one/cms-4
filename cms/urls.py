@@ -21,7 +21,7 @@ urlpatterns = i18n_patterns(
     url("^admin/", include(admin.site.urls)),
 )
 
- if settings.USE_MODELTRANSLATION:
+if settings.USE_MODELTRANSLATION:
     urlpatterns += [
         url('^i18n/$', set_language, name='set_language'),
     ]
@@ -77,7 +77,7 @@ urlpatterns += [
     # ``mezzanine.urls``, go right ahead and take the parts you want
     # from it, and use them directly below instead of using
     # ``mezzanine.urls``.
-    url("^wechat", include("testapp.urls")), 
+    url("^wechat/", include("testapp.urls")), 
     url("^", include("mezzanine.urls")),       
 
     # MOUNTING MEZZANINE UNDER A PREFIX
