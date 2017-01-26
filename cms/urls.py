@@ -77,8 +77,8 @@ urlpatterns += [
     # ``mezzanine.urls``, go right ahead and take the parts you want
     # from it, and use them directly below instead of using
     # ``mezzanine.urls``.
-    url("^", include("mezzanine.urls")),
-    url("^", include("testapp.urls")),    
+    url("^wechat$", include("testapp.urls")), 
+    url("^", include("mezzanine.urls")),       
 
     # MOUNTING MEZZANINE UNDER A PREFIX
     # ---------------------------------
