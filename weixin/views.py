@@ -120,8 +120,6 @@ def weixin_main(request):
 
             reply_text = '您要找的教程如下：'
 
- 
-
         response = wechat_instance.response_text(content=reply_text)
 
  
