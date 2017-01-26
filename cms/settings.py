@@ -229,7 +229,8 @@ if DJANGO_VERSION < (1, 9):
 # APPLICATIONS #
 ################
 
-INSTALLED_APPS = (    
+INSTALLED_APPS = (  
+    'wechart.apps.WechartConfig',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -248,8 +249,7 @@ INSTALLED_APPS = (
     "mezzanine.galleries",
     "mezzanine.twitter",
     # "mezzanine.accounts",
-    # "mezzanine.mobile",
-    "wechart.apps.WechartConfig",
+    # "mezzanine.mobile",    
 )
 
 # List of middleware classes to use. Order is important; in the request phase,
