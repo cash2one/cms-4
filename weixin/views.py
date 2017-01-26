@@ -8,6 +8,9 @@ from wechat_sdk import WechatBasic
 from wechat_sdk.exceptions import ParseError
 from wechat_sdk.messages import TextMessage
 from mezzanine.blog.models import BlogPost, BlogCategory
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 WECHAT_TOKEN = 'yuxuanyixiao'
 
