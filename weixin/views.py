@@ -124,7 +124,7 @@ def weixin_main(request):
 
             reply_text = '您要找的教程如下：'
         else :
-            reply_text = '敬请期待其他功能.'
+            reply_text = '敬请期待其他功能.\n'
 
             blog_posts = BlogPost.objects.published(for_user=None)[:10]
 
@@ -133,8 +133,8 @@ def weixin_main(request):
                 print blog_post.title
                 print blog_post.content
 
-                reply_text += u'%s,%s\n' % (blog_post.get_absolute_url, blog_post.title)
-
+                reply_text += u'%s\n' % (blog_post.title)
+        print reply_text
         response = wechat_instance.response_text(content=reply_text)
 
  
