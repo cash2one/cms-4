@@ -129,7 +129,8 @@ def weixin_main(request):
                 print  blog_post.get_absolute_url
                 print blog_post.title
                 print blog_post.content
-                reply_text += blog_post.title, '\n'
+
+                reply_text += u'%s,%s\n' % (blog_post.get_absolute_url, blog_post.title)
 
         response = wechat_instance.response_text(content=reply_text)
 
