@@ -123,9 +123,13 @@ def weixin_main(request):
         else :
             reply_text = '敬请期待其他功能.'
 
-            blog_posts = BlogPost.objects.published(for_user=None)
+            blog_posts = BlogPost.objects.published(for_user=None)[:10]
 
-            print 'blog_posts ==== ' , blog_posts
+            for blog_post in blog_posts.object_list :
+                print  blog_post.get_absolute_url
+                print blog_post.title
+                print blog_post.content
+                reply_text += blog_post.title, '\n'
 
         response = wechat_instance.response_text(content=reply_text)
 
