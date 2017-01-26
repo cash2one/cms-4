@@ -133,7 +133,7 @@ def weixin_main(request):
                 print blog_post.title
                 print blog_post.content
                 var = var +1;
-                reply_text += u'%d.【<a href="http://www.pyuxuan.cn/%s">%s</a>】\n' % (var,blog_post.get_absolute_url(),blog_post.title)
+                reply_text += u'%d.【<a href="http://www.pyuxuan.cn%s">%s</a>】\n' % (var,blog_post.get_absolute_url(),blog_post.title)
         print reply_text
         response = wechat_instance.response_text(content=reply_text)
 
