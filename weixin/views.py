@@ -31,6 +31,7 @@ wechat_instance = WechatBasic(
  
 
 @csrf_exempt
+
 def weixin_main(request):
 
     if request.method == 'GET':
