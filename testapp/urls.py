@@ -1,6 +1,5 @@
 from django.conf.urls import include, url
-
-urlpatterns = []
+from . import views
 
 urlpatterns += [
                 url(r'^wechat/$', views.weixin_main, name='wechat'),
