@@ -55,14 +55,26 @@ def baidu_translate (query,fromLang,toLang) :
     try:
         httpClient = httplib.HTTPConnection('api.fanyi.baidu.com')
         httpClient.request('GET', myurl)
-
         # response是HTTPResponse对象
         response = httpClient.getresponse()
         resut = response.read()
         jsonresult = json.loads(resut)
+
+        errorCode = jsonresult['error_code']
+        errorMmsg = jsonresult['error_msg']
+
+        print 'errorCode:',errorCode,'errorMmsg:',errorMmsg
+
+        if errorCode is not None :
+            result = 'errorCode:',errorCode,'errorMmsg:',errorMmsg
+            print 'These is error ', 'errorCode:', errorCode, 'errorMmsg:', errorMmsg
+        else :
+            result = jsonresult['trans_result'][0]['dst']
+            print result
         print jsonresult
         print jsonresult['trans_result'][0]['dst']
         print type(jsonresult['trans_result'][0])
+        return result
     except Exception, e:
         print e
     finally:
