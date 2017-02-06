@@ -122,19 +122,16 @@ def weixin_main(request):
         else :
             reply_text = '翻译结果:\n'
 
-            blog_posts = BlogPost.objects.published(for_user=None)[:10]
-            var = 0;
-            for blog_post in blog_posts :
-                print  blog_post.get_absolute_url()
-                print blog_post.title
-                print blog_post.content
-                var = var +1;
-                print BlogPost.categories
+            # blog_posts = BlogPost.objects.published(for_user=None)[:10]
+            # var = 0;
+            # for blog_post in blog_posts :
+            #     print  blog_post.get_absolute_url()
+            #     print blog_post.title
+            #     print blog_post.content
+            #     var = var +1;
             #     reply_text += u'%d.【<a href="http://www.pyuxuan.cn%s">%s</a>】\n' % (var,blog_post.get_absolute_url(),blog_post.title)
 
-            reply_text = reply_text + fanyi.baidu_translate(content.encode('utf8'),'auto','en')
-
-
+            reply_text = reply_text + fanyi.baidu_translate(content,'auto','en')
 
         print reply_text
         response = wechat_instance.response_text(content=reply_text)

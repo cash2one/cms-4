@@ -6,6 +6,7 @@ import md5
 import urllib
 import random
 import json
+import charPy
 
 appid = '20170206000038641'
 secretKey = 'AvtF0UjkaL3lS63pZO5U'
@@ -51,7 +52,14 @@ def baidu_translate (query,fromLang,toLang) :
     m1 = md5.new()
     m1.update(sign)
     sign = m1.hexdigest()
-    myurl = '/api/trans/vip/translate' + '?appid=' + appid + '&q=' + urllib.quote(query) + '&from=' + fromLang + '&to=' + toLang + '&salt=' + str(salt) + '&sign=' + sign
+    fromLang = 'auto'
+    hasChines = charPy.has_chinese(query)
+    if hasChines == True :
+        toLang = 'en'
+    else :
+        toLang = 'zh'
+
+    myurl = '/api/trans/vip/translate' + '?appid=' + appid + '&q=' + urllib.quote(query.encode('utf8')) + '&from=' + fromLang + '&to=' + toLang + '&salt=' + str(salt) + '&sign=' + sign
     print myurl
     try:
         httpClient = httplib.HTTPConnection('api.fanyi.baidu.com')
