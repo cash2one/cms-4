@@ -131,7 +131,7 @@ def weixin_main(request):
             #     var = var +1;
             #     reply_text += u'%d.【<a href="http://www.pyuxuan.cn%s">%s</a>】\n' % (var,blog_post.get_absolute_url(),blog_post.title)
 
-            reply_text = reply_text + fanyi.baidu_translate(content,'auto','en')
+            reply_text = reply_text + fanyi.baidu_translate(content.encode('utf8'),'auto','en')
 
         print reply_text
         response = wechat_instance.response_text(content=reply_text)
