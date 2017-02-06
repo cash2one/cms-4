@@ -9,13 +9,13 @@ from wechat_sdk.exceptions import ParseError
 from wechat_sdk.messages import TextMessage
 from mezzanine.blog.models import BlogPost, BlogCategory
 import sys
+import fanyi
+
 reload(sys)
 sys.setdefaultencoding('utf8')
 
 WECHAT_TOKEN = 'yuxuanyixiao'
-
 AppID = 'wx6c1c0226980f62e2'
-
 AppSecret = '5b29cdb78ab3cdd95972d7a9bee4cd24'
 
  
@@ -23,13 +23,9 @@ AppSecret = '5b29cdb78ab3cdd95972d7a9bee4cd24'
 # 实例化 WechatBasic
 
 wechat_instance = WechatBasic(
-
     token=WECHAT_TOKEN,
-
     appid=AppID,
-
     appsecret=AppSecret
-
 )
 
  
@@ -124,16 +120,19 @@ def weixin_main(request):
 
             reply_text = '您要找的教程如下：'
         else :
-            reply_text = '最新资讯:\n'
+            reply_text = '翻译结果:\n'
 
-            blog_posts = BlogPost.objects.published(for_user=None)[:10]
-            var = 0;
-            for blog_post in blog_posts :
-                print  blog_post.get_absolute_url()
-                print blog_post.title
-                print blog_post.content
-                var = var +1;
-                reply_text += u'%d.【<a href="http://www.pyuxuan.cn%s">%s</a>】\n' % (var,blog_post.get_absolute_url(),blog_post.title)
+            # blog_posts = BlogPost.objects.published(for_user=None)[:10]
+            # var = 0;
+            # for blog_post in blog_posts :
+            #     print  blog_post.get_absolute_url()
+            #     print blog_post.title
+            #     print blog_post.content
+            #     var = var +1;
+            #     reply_text += u'%d.【<a href="http://www.pyuxuan.cn%s">%s</a>】\n' % (var,blog_post.get_absolute_url(),blog_post.title)
+
+            reply_text = reply_text + fanyi.baidu_translate(content,'auto','en')
+
         print reply_text
         response = wechat_instance.response_text(content=reply_text)
 
