@@ -35,107 +35,62 @@ wechat_instance = WechatBasic(
 def weixin_main(request):
 
     if request.method == 'GET':
-
         # 检验合法性
-
         # 从 request 中提取基本信息 (signature, timestamp, nonce, xml)
-
         signature = request.GET.get('signature')
-
         timestamp = request.GET.get('timestamp')
-
         nonce = request.GET.get('nonce')
 
- 
-
         if not wechat_instance.check_signature(
-
                 signature=signature, timestamp=timestamp, nonce=nonce):
-
             return HttpResponseBadRequest('Verify Failed')
 
- 
-
         return HttpResponse(
-
             request.GET.get('echostr', ''), content_type="text/plain")
-
- 
-
- 
 
     # 解析本次请求的 XML 数据
 
     try:
-
         wechat_instance.parse_data(data=request.body)
-
     except ParseError:
-
         return HttpResponseBadRequest('Invalid XML Data')
 
- 
-
     # 获取解析好的微信请求信息
-
     message = wechat_instance.get_message()
 
- 
-
     # 关注事件以及不匹配时的默认回复
-
     response = wechat_instance.response_text(
-
         content = (
-
-            '感谢您的关注！\n回复【功能】两个字查看支持的功能，还可以回复任意内容开始聊天'
-
-            '\n【<a href="http://www.ziqiangxuetang.com">自强学堂手机版</a>】'
-
+            '感谢您的关注！\n回复【功能】两个字查看支持的功能，还可以回复任意内容进行翻译'
+            '\n【<a href="http://www.pyuxuan.cn">轩轩一笑</a>】'
             ))
 
     if isinstance(message, TextMessage):
-
         # 当前会话内容
-
         content = message.content.strip()
-
         if content == '功能':
-
             reply_text = (
-
-                    '目前支持的功能：\n1. 关键词后面加上【教程】两个字可以搜索教程，'
-
-                    '比如回复 "Django 后台教程"\n'
-
-                    '2. 回复任意词语，查天气，陪聊天，讲故事，无所不能！\n'
-
-                    '还有更多功能正在开发中哦 ^_^\n'
-
-                    '【<a href="http://www.ziqiangxuetang.com">自强学堂手机版</a>】'
-
+                    '目前支持的功能：\n1. 回复【资讯】可以推送相关资讯，'
+                    '2. 回复任意中英文词语，可以进行中英翻译\n'
+                    '还有更多功能正在开发中哦，尽情期待，请将宝贵建议发送给我 ^_^\n'
+                    '【<a href="http://www.pyuxuan.cn">轩轩一笑</a>】'
                 )
 
-        elif content.endswith('教程'):
-
-            reply_text = '您要找的教程如下：'
+        elif content.endswith('资讯'):
+            blog_posts = BlogPost.objects.published(for_user=None)[:10]
+            var = 0;
+            reply_text = None;
+            for blog_post in blog_posts :
+                print  blog_post.get_absolute_url()
+                print blog_post.title
+                print blog_post.content
+                var = var +1;
+                reply_text += u'%d.【<a href="http://www.pyuxuan.cn%s">%s</a>】\n' % (var,blog_post.get_absolute_url(),blog_post.title)
         else :
             reply_text = '翻译结果:\n'
-
-            # blog_posts = BlogPost.objects.published(for_user=None)[:10]
-            # var = 0;
-            # for blog_post in blog_posts :
-            #     print  blog_post.get_absolute_url()
-            #     print blog_post.title
-            #     print blog_post.content
-            #     var = var +1;
-            #     reply_text += u'%d.【<a href="http://www.pyuxuan.cn%s">%s</a>】\n' % (var,blog_post.get_absolute_url(),blog_post.title)
-
             reply_text = reply_text + fanyi.baidu_translate(content,'auto','en')
 
         print reply_text
         response = wechat_instance.response_text(content=reply_text)
-
- 
 
     return HttpResponse(response, content_type="application/xml")
