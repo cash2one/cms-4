@@ -231,6 +231,7 @@ if DJANGO_VERSION < (1, 9):
 
 INSTALLED_APPS = (
     "weixin",
+    "solid",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -250,7 +251,6 @@ INSTALLED_APPS = (
     "mezzanine.twitter",
     # "mezzanine.accounts",
     # "mezzanine.mobile",
-    "solid",
 )
 
 # List of middleware classes to use. Order is important; in the request phase,
