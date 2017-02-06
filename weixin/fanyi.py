@@ -82,4 +82,4 @@ def baidu_translate (query,fromLang,toLang) :
         if httpClient:
             httpClient.close()
 
-baidu_translate('新加坡','zh','en')
+# baidu_translate('新加坡','zh','en')
