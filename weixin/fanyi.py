@@ -45,6 +45,7 @@ myurl = '/api/trans/vip/translate'
 
 def baidu_translate (query,fromLang,toLang) :
     httpClient = None
+    errorCode = None
     salt = random.randint(32768, 65536)
     sign = appid + query + str(salt) + secretKey
     m1 = md5.new()
@@ -60,10 +61,10 @@ def baidu_translate (query,fromLang,toLang) :
         translateResult = response.read()
         jsonResult = json.loads(translateResult)
 
-        errorCode = jsonResult['error_code']
-        errorMmsg = jsonResult['error_msg']
-
-        print 'errorCode:',errorCode,'errorMmsg:',errorMmsg
+        if 'error_code' in jsonResult:
+            errorCode = jsonResult['error_code']
+            errorMmsg = jsonResult['error_msg']
+            print 'errorCode:',errorCode,'errorMmsg:',errorMmsg
 
         if errorCode is not None :
             result = 'errorCode:',errorCode,'errorMmsg:',errorMmsg
