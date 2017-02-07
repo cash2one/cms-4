@@ -36,6 +36,7 @@ wechat_instance = WechatBasic(
 
 def weixin_main(request):
     reply_text = ''
+    content = ''
     if request.method == 'GET':
         # 检验合法性
         # 从 request 中提取基本信息 (signature, timestamp, nonce, xml)
