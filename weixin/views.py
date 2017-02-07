@@ -7,6 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 from wechat_sdk import WechatBasic
 from wechat_sdk.exceptions import ParseError
 from wechat_sdk.messages import TextMessage
+from wechat_sdk.messages import VoiceMessage
 from mezzanine.blog.models import BlogPost, BlogCategory
 import sys
 import fanyi
