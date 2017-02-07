@@ -110,7 +110,7 @@ def weixin_main(request):
         print articles
         response = wechat_instance.response_news(articles)
     else:
-        reply_text = '翻译结果:\n'
+        reply_text = reply_text + '翻译结果:\n'
         reply_text = reply_text + fanyi.baidu_translate(content, 'auto', 'en')
         print reply_text
         response = wechat_instance.response_text(content=reply_text)
