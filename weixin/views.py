@@ -96,8 +96,9 @@ def weixin_main(request):
     
     elif isinstance(message, VoiceMessage):  
         reply_text = '语音内容:\n'
+        print 'message.recognition : ',message.recognition
         if message.recognition is None:
-           reply_text = + '内容为空'
+           reply_text = reply_text + '内容为空'
         else:
            content = message.recognition.strip()
            reply_text = reply_text + content
