@@ -49,5 +49,6 @@ def getNews(news_type) :
             article['url'] = news['url']
             articles.append(article)
     print articles
+    return articles
 
-getNews(u'头条新闻')
+#getNews(u'头条新闻')

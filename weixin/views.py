@@ -35,7 +35,7 @@ wechat_instance = WechatBasic(
 @csrf_exempt
 
 def weixin_main(request):
-
+    reply_text = ''
     if request.method == 'GET':
         # 检验合法性
         # 从 request 中提取基本信息 (signature, timestamp, nonce, xml)
