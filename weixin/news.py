@@ -7,7 +7,7 @@ import json
 
 news_types = {
 u"推荐新闻":"/touch/article/list/BA8J7DG9wangning/0-10.html",
-u"头条新闻":"/touch/article/list/BBM54PGAwangning/0-1.html",
+u"头条新闻":"/touch/article/list/BBM54PGAwangning/0-2.html",
 u"娱乐新闻":"/touch/article/list/BA10TA81wangning/0-10.html",
 u"体育新闻":"/touch/article/list/BA8E6OEOwangning/0-10.html",
 u"财经新闻":"/touch/article/list/BA8EE5GMwangning/0-10.html",
