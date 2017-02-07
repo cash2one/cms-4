@@ -92,5 +92,18 @@ def weixin_main(request):
 
         print reply_text
         response = wechat_instance.response_text(content=reply_text)
-
+    
+    elif isinstance(message, VoiceMessage):  
+        reply_text = '语音内容:\n'
+        if message.recognition is None:
+           reply_text = + '内容为空'
+        else:
+           content = message.recognition.strip()
+           reply_text = reply_text + content
+           reply_text = reply_text + '翻译结果:\n'
+           reply_text = reply_text + fanyi.baidu_translate(content,'auto','en')
+        
+        print reply_text
+        response = wechat_instance.response_text(content=reply_text)
+        
     return HttpResponse(response, content_type="application/xml")
