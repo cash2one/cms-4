@@ -102,7 +102,7 @@ def weixin_main(request):
         else:
            content = message.recognition.strip()
            reply_text = reply_text + content
-           reply_text = reply_text + '翻译结果:\n'
+           reply_text = reply_text + '\n翻译结果:\n'
            reply_text = reply_text + fanyi.baidu_translate(content,'auto','en')
         
         print reply_text
