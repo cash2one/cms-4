@@ -105,7 +105,7 @@ def weixin_main(request):
             var, blog_post.get_absolute_url(), blog_post.title)
         print reply_text
         response = wechat_instance.response_text(content=reply_text)
-    elif content.endswith('新闻'):
+    elif content.find('新闻') > -1:
         articles = news.getNews(content)
         response = wechat_instance.response_news(articles)
     else:
