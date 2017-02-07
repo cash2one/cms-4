@@ -108,7 +108,7 @@ def weixin_main(request):
     elif content.find('新闻') > -1:
         articles = news.getNews(content)
         response = wechat_instance.response_news(articles)
-    else:
+    elif content <> '':
         reply_text = reply_text + '翻译结果:\n'
         reply_text = reply_text + fanyi.baidu_translate(content, 'auto', 'en')
         print reply_text
