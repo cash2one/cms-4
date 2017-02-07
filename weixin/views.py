@@ -63,9 +63,13 @@ def weixin_main(request):
     # 关注事件以及不匹配时的默认回复
     response = wechat_instance.response_text(
         content = (
-            '感谢您的关注！\n回复【功能】两个字查看支持的功能，还可以回复任意内容进行中英翻译[支持语音识别]'
-            '\n【<a href="http://www.pyuxuan.cn">轩轩一笑</a>】'
-            ))
+            '感谢您的关注！\n回复【功能】两个字查看支持的功能，还可以回复任意内容进行中英翻译[支持语音识别]\n'
+            '1. 回复【资讯】可以推送相关资讯.\n'
+            '2.回复新闻【头条新闻】【娱乐新闻】【科技新闻】【军事新闻】【财经新闻】【体育新闻】获取热门新闻'
+            '3.回复任意中英文词语，可以进行中英翻译[支持语音识别]\n'
+            '还有更多功能正在开发中哦，尽情期待，请将宝贵建议发送给我 ^_^\n'
+            '【<a href="http://www.pyuxuan.cn">轩轩一笑</a>】'
+           ))
 
     if isinstance(message, TextMessage):
         # 当前会话内容
@@ -78,6 +82,9 @@ def weixin_main(request):
         else:
            content = message.recognition.strip()
            reply_text = reply_text + content + '\n'
+           print content
+           content.replace('。','')
+
            # reply_text = reply_text + '\n翻译结果:\n'
            # reply_text = reply_text + fanyi.baidu_translate(content,'auto','en')
         # print reply_text
@@ -86,7 +93,8 @@ def weixin_main(request):
     if content == '功能':
         reply_text = (
             '目前支持的功能：\n1. 回复【资讯】可以推送相关资讯.\n'
-            '2. 回复任意中英文词语，可以进行中英翻译[支持语音识别]\n'
+            '2.回复新闻【头条新闻】【娱乐新闻】【科技新闻】【军事新闻】【财经新闻】【体育新闻】获取热门新闻'
+            '3.回复任意中英文词语，可以进行中英翻译[支持语音识别]\n'
             '还有更多功能正在开发中哦，尽情期待，请将宝贵建议发送给我 ^_^\n'
             '【<a href="http://www.pyuxuan.cn">轩轩一笑</a>】'
         )
