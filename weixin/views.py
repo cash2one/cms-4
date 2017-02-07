@@ -85,7 +85,7 @@ def weixin_main(request):
            content = message.recognition.strip()
            reply_text = reply_text + content + '\n'
            print chardet.detect(content)
-           content.replace('。','')
+           content = content.replace('160','')
 
            # reply_text = reply_text + '\n翻译结果:\n'
            # reply_text = reply_text + fanyi.baidu_translate(content,'auto','en')
