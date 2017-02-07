@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import unicode_literals
+
+import chardet
 from django.http.response import HttpResponse, HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_exempt
 from wechat_sdk import WechatBasic
@@ -82,7 +84,7 @@ def weixin_main(request):
         else:
            content = message.recognition.strip()
            reply_text = reply_text + content + '\n'
-           print content
+           print chardet.detect(content)
            content.replace('。','')
 
            # reply_text = reply_text + '\n翻译结果:\n'
