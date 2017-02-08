@@ -14,6 +14,7 @@ from mezzanine.blog.models import BlogPost, BlogCategory
 import sys
 import fanyi
 import news
+import jiqiren
 
 reload(sys)
 sys.setdefaultencoding('utf8')
@@ -125,5 +126,30 @@ def weixin_main(request):
         print reply_text
         response = wechat_instance.response_text(content=reply_text)
 
+    #调用智能机器人回答问题，解析分析答案返回微信客户端    
+    jiqiren.getAnswerByAI(content，‘ppweixin’，‘GET’)   
+    
+    if res:
+        result_code = res["code"]
+        print "%s:%s" % (res["code"],res["text"])
+        if result_code == 100000 :
+            #成功请求
+            print res["text"]
+        elif result_code == 200000 :
+         
+        elif result_code == 302000 :
+         
+        elif result_code == 308000 :
+        
+        else:
+            print "%s:%s" % (res["code"],res["text"])
+        reply_text = res["text"]
+    else:
+        print "request api error"
+        reply_text = "request api error"
+    
+    response = wechat_instance.response_text(content=reply_text)
+    
     print response
+    
     return HttpResponse(response, content_type="application/xml")
