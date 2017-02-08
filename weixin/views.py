@@ -10,6 +10,7 @@ from wechat_sdk import WechatBasic
 from wechat_sdk.exceptions import ParseError
 from wechat_sdk.messages import TextMessage
 from wechat_sdk.messages import VoiceMessage
+from wechat_sdk.messages import EventMessage
 from mezzanine.blog.models import BlogPost, BlogCategory
 import sys
 import fanyi
@@ -23,7 +24,7 @@ WECHAT_TOKEN = 'yuxuanyixiao'
 AppID = 'wx6c1c0226980f62e2'
 AppSecret = '5b29cdb78ab3cdd95972d7a9bee4cd24'
 
-welcomeTitle = '欢迎关注公众号，点击查看我们的详细功能'
+welcomeTitle = '欢迎关注公众号'
 logoUrl = 'http://mmbiz.qlogo.cn/mmbiz_jpg/WOBRP1ClHtJ94zJYlan7fW8ZWrSmxY6eYvf96Ricm5ToBbpib3Kia5R5yZmKia38sqzP7BJDmeeGLYY2Xrj4ZU9icpA/0?wx_fmt=jpeg'
 welcomeDescription = ('''
 我们非常聪明的机器人可以回答你很多问题啦～\n
@@ -116,6 +117,10 @@ def weixin_main(request):
            # reply_text = reply_text + fanyi.baidu_translate(content,'auto','en')
         # print reply_text
         # response = wechat_instance.response_text(content=reply_text)
+    elif isinstance(message, EventMessage):
+       if message.type == 'subscribe' :
+          response = wechat_instance.response_news(welcomeArticles)
+          return HttpResponse(response, content_type="application/xml")
 
     if content == '功能':
         # reply_text = (
