@@ -41,18 +41,7 @@ def getAnswerByAI(query,userid, m="GET"):
     
     if res:
         result_code = res["code"]
-        #print "%s:%s" % (res["code"],res["text"])
-        if result_code == 100000 :
-            #成功请求
-            #print res["text"]
-        elif result_code == 200000 :
-         
-        elif result_code == 302000 :
-         
-        elif result_code == 308000 :
-        
-        else:
-            print "%s:%s" % (res["code"],res["text"])
+        print "%s:%s" % (res["code"],res["text"])       
     else:
         print "request api error"
  
