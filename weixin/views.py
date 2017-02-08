@@ -136,11 +136,11 @@ def weixin_main(request):
             #成功请求
             print res["text"]
         elif result_code == 200000 :
-         
+            print res["text"]
         elif result_code == 302000 :
-         
+            print res["text"]
         elif result_code == 308000 :
-        
+            print res["text"]
         else:
             print "%s:%s" % (res["code"],res["text"])
         reply_text = res["text"]
