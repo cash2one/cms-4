@@ -40,6 +40,7 @@ wechat_instance = WechatBasic(
 def weixin_main(request):
     reply_text = ''
     content = ''
+    fromUser = ''
     if request.method == 'GET':
         # 检验合法性
         # 从 request 中提取基本信息 (signature, timestamp, nonce, xml)
@@ -63,6 +64,8 @@ def weixin_main(request):
 
     # 获取解析好的微信请求信息
     message = wechat_instance.get_message()
+    fromUser = message.source
+    print  'fromUser : ', fromUser
     # 关注事件以及不匹配时的默认回复
     response = wechat_instance.response_text(
         content = (
@@ -118,8 +121,19 @@ def weixin_main(request):
     #     print reply_text
     #     response = wechat_instance.response_text(content=reply_text)
     elif content.find('新闻') > -1:
-        articles = news.getNews(content)
-        response = wechat_instance.response_news(articles)
+        result = jiqiren.getAnswerByAI(content, fromUser, 'GET')
+        if result is not None:
+            responseType = result['responseType']
+            if responseType == 'article':
+                articles = result['content']
+                response = wechat_instance.response_news(articles)
+            else :
+                articles = news.getNews(content)
+                response = wechat_instance.response_news(articles)
+        else :
+            articles = news.getNews(content)
+            response = wechat_instance.response_news(articles)
+
     # elif content <> '':
     #     reply_text = reply_text + '翻译结果:\n'
     #     reply_text = reply_text + fanyi.baidu_translate(content, 'auto', 'en')
@@ -127,7 +141,7 @@ def weixin_main(request):
     #     response = wechat_instance.response_text(content=reply_text)
     else :
         # 调用智能机器人回答问题，解析分析答案返回微信客户端
-        result = jiqiren.getAnswerByAI(content, 'ppweixin', 'GET')
+        result = jiqiren.getAnswerByAI(content, fromUser, 'GET')
         if result is not None :
             responseType = result['responseType']
             if responseType == 'text' :
