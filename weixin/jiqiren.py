@@ -40,16 +40,16 @@ def request1(appkey,query, m="GET"):
     res = json.loads(content)
     print 'res : ', res
     if res:
-        error_code = res["error_code"]
+        error_code = res["code"]
         if error_code == 0:
             #成功请求
-            print res["result"]
+            print res["text"]
         else:
-            print "%s:%s" % (res["error_code"],res["reason"])
+            print "%s:%s" % (res["code"],res["text"])
     else:
         print "request api error"
  
  
 if __name__ == '__main__':
-    query = raw_input("raw_input: ")
+    query = raw_input("请输入你的问题: ")
     main(query)
