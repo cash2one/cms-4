@@ -7,13 +7,12 @@ from urllib import urlencode
 # 图灵机器人调用示例代码
 # 在线接口文档：http://www.juhe.cn/docs/112
 #----------------------------------
- 
-def main(question):
- 
-    #配置您申请的APPKey
-    appkey = "4db23df6938f42b59aeae27226cff3af"
-    apiurl = "http://www.tuling123.com/openapi/api"
- 
+
+#配置您申请的APPKey
+appkey = "4db23df6938f42b59aeae27226cff3af"
+apiurl = "http://www.tuling123.com/openapi/api"
+
+def main(question): 
     #1.问答
     request1(appkey,question,"GET") 
  
