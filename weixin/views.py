@@ -118,15 +118,16 @@ def weixin_main(request):
         # response = wechat_instance.response_text(content=reply_text)
 
     if content == '功能':
-        reply_text = (
-            '目前支持的功能：\n1. 回复【资讯】可以推送相关资讯.\n'
-            '2.回复新闻【头条新闻】【娱乐新闻】【科技新闻】【军事新闻】【财经新闻】【体育新闻】获取热门新闻'
-            '3.回复任意中英文词语，可以进行中英翻译[支持语音识别]\n'
-            '还有更多功能正在开发中哦，尽情期待，请将宝贵建议发送给我 ^_^\n'
-            '【<a href="http://www.pyuxuan.cn">轩轩一笑</a>】'
-        )
-        print reply_text
-        response = wechat_instance.response_text(content=reply_text)
+        # reply_text = (
+        #     '目前支持的功能：\n1. 回复【资讯】可以推送相关资讯.\n'
+        #     '2.回复新闻【头条新闻】【娱乐新闻】【科技新闻】【军事新闻】【财经新闻】【体育新闻】获取热门新闻'
+        #     '3.回复任意中英文词语，可以进行中英翻译[支持语音识别]\n'
+        #     '还有更多功能正在开发中哦，尽情期待，请将宝贵建议发送给我 ^_^\n'
+        #     '【<a href="http://www.pyuxuan.cn">轩轩一笑</a>】'
+        # )
+        # print reply_text
+        #response = wechat_instance.response_text(content=reply_text)
+        response = wechat_instance.response_news(welcomeArticles)
     # elif content.endswith('资讯'):
     #     blog_posts = BlogPost.objects.published(for_user=None)[:10]
     #     var = 0;
