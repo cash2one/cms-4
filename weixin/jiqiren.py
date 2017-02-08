@@ -14,11 +14,11 @@ apiurl = "http://www.tuling123.com/openapi/api"
 
 def main(question): 
     #1.问答
-    request1(appkey,question,"GET") 
+    getAnswerByAI(appkey,question,"GET") 
  
  
 #问答
-def request1(appkey,query, m="GET"):    
+def getAnswerByAI(query,userid, m="GET"):    
     params = {
         "key" : appkey, #您申请到的本接口专用的APPKEY
         "info" : query, #要发送给机器人的内容，不要超过30个字符
@@ -26,9 +26,8 @@ def request1(appkey,query, m="GET"):
         "loc" : "", #地点，如北京中关村
         "lon" : "", #经度，东经116.234632（小数点后保留6位），需要写为116234632
         "lat" : "", #纬度，北纬40.234632（小数点后保留6位），需要写为40234632
-        "userid" : "", #1~32位，此userid针对您自己的每一个用户，用于上下文的关联
- 
-    }
+        "userid" : userid, #1~32位，此userid针对您自己的每一个用户，用于上下文的关联 
+    }  
     params = urlencode(params)
     if m =="GET":
         f = urllib.urlopen("%s?%s" % (apiurl, params))
@@ -39,17 +38,25 @@ def request1(appkey,query, m="GET"):
     print 'content : ', content
     res = json.loads(content)
     print 'res : ', res
+    
     if res:
         result_code = res["code"]
         print "%s:%s" % (res["code"],res["text"])
-        if error_code == 0:
+        if result_code == 100000 :
             #成功请求
             print res["text"]
+        elif result_code == 200000 :
+         
+        elif result_code == 302000 :
+         
+        elif result_code == 308000 :
+        
         else:
             print "%s:%s" % (res["code"],res["text"])
     else:
         print "request api error"
  
+    return res
  
 if __name__ == '__main__':
     query = raw_input("请输入你的问题: ")
