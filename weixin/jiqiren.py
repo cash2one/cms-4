@@ -40,7 +40,8 @@ def request1(appkey,query, m="GET"):
     res = json.loads(content)
     print 'res : ', res
     if res:
-        error_code = res["code"]
+        result_code = res["code"]
+        print "%s:%s" % (res["code"],res["text"])
         if error_code == 0:
             #成功请求
             print res["text"]
