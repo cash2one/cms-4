@@ -35,7 +35,7 @@ def getNews(news_type) :
     news_url = news_dict['url']
     news_keywords = news_dict['keywords']
     seq = random.randint(0,50)
-    news_url = news_url % (seq,seq + 5)
+    news_url = news_url % (seq,5)
     httpClient = httplib.HTTPConnection('3g.163.com')
     httpClient.request('GET', news_url)
     #request = urllib2.Request( 'http://3g.163.com/touch/article/list/BBM54PGAwangning/0-10.html')
