@@ -104,52 +104,42 @@ def weixin_main(request):
         )
         print reply_text
         response = wechat_instance.response_text(content=reply_text)
-    elif content.endswith('资讯'):
-        blog_posts = BlogPost.objects.published(for_user=None)[:10]
-        var = 0;
-        reply_text = '';
-        for blog_post in blog_posts:
-            print  blog_post.get_absolute_url()
-            print blog_post.title
-            print blog_post.content
-            var = var + 1;
-            reply_text += u'%d.【<a href="http://www.pyuxuan.cn%s">%s</a>】\n' % (
-            var, blog_post.get_absolute_url(), blog_post.title)
-        print reply_text
-        response = wechat_instance.response_text(content=reply_text)
+    # elif content.endswith('资讯'):
+    #     blog_posts = BlogPost.objects.published(for_user=None)[:10]
+    #     var = 0;
+    #     reply_text = '';
+    #     for blog_post in blog_posts:
+    #         print  blog_post.get_absolute_url()
+    #         print blog_post.title
+    #         print blog_post.content
+    #         var = var + 1;
+    #         reply_text += u'%d.【<a href="http://www.pyuxuan.cn%s">%s</a>】\n' % (
+    #         var, blog_post.get_absolute_url(), blog_post.title)
+    #     print reply_text
+    #     response = wechat_instance.response_text(content=reply_text)
     elif content.find('新闻') > -1:
         articles = news.getNews(content)
         response = wechat_instance.response_news(articles)
-    elif content <> '':
-        reply_text = reply_text + '翻译结果:\n'
-        reply_text = reply_text + fanyi.baidu_translate(content, 'auto', 'en')
-        print reply_text
-        response = wechat_instance.response_text(content=reply_text)
-
-    #调用智能机器人回答问题，解析分析答案返回微信客户端    
-    res = jiqiren.getAnswerByAI(content,'ppweixin','GET')   
-    
-    if res:
-        result_code = res["code"]
-        print "%s:%s" % (res["code"],res["text"])
-        if result_code == 100000 :
-            #成功请求
-            print res["text"]
-        elif result_code == 200000 :
-            print res["text"]
-        elif result_code == 302000 :
-            print res["text"]
-        elif result_code == 308000 :
-            print res["text"]
-        else:
-            print "%s:%s" % (res["code"],res["text"])
-        reply_text = res["text"]
-    else:
-        print "request api error"
-        reply_text = "request api error"
-    
-    response = wechat_instance.response_text(content=reply_text)
-    
+    # elif content <> '':
+    #     reply_text = reply_text + '翻译结果:\n'
+    #     reply_text = reply_text + fanyi.baidu_translate(content, 'auto', 'en')
+    #     print reply_text
+    #     response = wechat_instance.response_text(content=reply_text)
+    else :
+        # 调用智能机器人回答问题，解析分析答案返回微信客户端
+        result = jiqiren.getAnswerByAI(content, 'ppweixin', 'GET')
+        if result is not None :
+            responseType = result['responseType']
+            if responseType == 'text' :
+                contentStr = result['content']
+                response = wechat_instance.response_text(content=contentStr)
+            elif responseType == 'url':
+                contentStr = result['content']
+                contentUrl = result['url']
+                contentStr = contentStr + '【<a href="' + contentUrl + '">点击</a>】'
+                response = wechat_instance.response_text(content=contentStr)
+            elif responseType == 'article':
+                articles = result['content']
+                response = wechat_instance.response_news(articles)
     print response
-    
     return HttpResponse(response, content_type="application/xml")

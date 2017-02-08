@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import json, urllib
+import random
 from urllib import urlencode
  
 #----------------------------------
@@ -12,9 +13,9 @@ from urllib import urlencode
 appkey = "4db23df6938f42b59aeae27226cff3af"
 apiurl = "http://www.tuling123.com/openapi/api"
 
-def main(question): 
+def main(question,userid):
     #1.问答
-    getAnswerByAI(appkey,question,"GET") 
+    getAnswerByAI(question,userid,"GET")
  
  
 #问答
@@ -37,16 +38,76 @@ def getAnswerByAI(query,userid, m="GET"):
     content = f.read()
     print 'content : ', content
     res = json.loads(content)
-    print 'res : ', res
-    
+    print res
+    result = {}
     if res:
         result_code = res["code"]
-        print "%s:%s" % (res["code"],res["text"])       
+        #print "%s:%s" % (res["code"],res["text"])
+        if result_code == 100000 :
+            #成功请求
+            result['responseType'] = 'text'
+            result['content'] = res["text"]
+            result['result_code'] = result_code
+        elif result_code == 200000 :
+            result['responseType'] = 'url'
+            result['content'] = res["text"]
+            result['url'] = res["url"]
+            result['result_code'] = result_code
+        elif result_code == 302000 :
+            result['responseType'] = 'article'
+            result['result_code'] = result_code
+            articlejson = res["list"]
+            articleselected = None
+            if len(articlejson) > 5 :
+                articleselected = random.sample(articlejson, 5)
+            else :
+                articleselected = articlejson
+            articles = []
+            if articleselected is not None :
+                for news in articleselected:
+                    article = {}
+                    article['title'] = news['article']
+                    article['description'] = news['article']
+                    article['picurl'] = news['icon']
+                    article['url'] = news['detailurl']
+                    articles.append(article)
+            print articles
+            result['content'] = articles
+        elif result_code == 308000 :
+            result['responseType'] = 'article'
+            result['result_code'] = result_code
+            articlejson = res["list"]
+            articleselected = None
+            if len(articlejson) > 5:
+                articleselected = random.sample(articlejson, 5)
+            else:
+                articleselected = articlejson
+            articles = []
+            if articleselected is not None:
+                for news in articleselected:
+                    article = {}
+                    article['title'] = news['name']
+                    article['description'] = news['info']
+                    article['picurl'] = news['icon']
+                    article['url'] = news['detailurl']
+                    articles.append(article)
+            print articles
+            result['content'] = articles
+        else:
+            result['responseType'] = 'text'
+            result['content'] = res["text"]
+            result['result_code'] = result_code
+
     else:
         print "request api error"
+        reply_text = "request api error"
+        result['responseType'] = 'text'
+        result['content'] = 'request api error'
+        result['result_code'] = 'error'
+
+    print result
+    return result
  
-    return res
- 
-#if __name__ == '__main__':
-#    query = raw_input("请输入你的问题: ")
-#    main(query)
+# if __name__ == '__main__':
+#     query = raw_input("请输入你的问题: ")
+#     main(query,'userid')
