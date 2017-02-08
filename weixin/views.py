@@ -127,7 +127,7 @@ def weixin_main(request):
         response = wechat_instance.response_text(content=reply_text)
 
     #调用智能机器人回答问题，解析分析答案返回微信客户端    
-    jiqiren.getAnswerByAI(content,‘ppweixin’,‘GET’)   
+    jiqiren.getAnswerByAI(content,'ppweixin','GET')   
     
     if res:
         result_code = res["code"]
