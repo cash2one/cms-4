@@ -28,16 +28,17 @@ welcomeTitle = '欢迎关注公众号'
 logoUrl = 'http://mmbiz.qlogo.cn/mmbiz_jpg/WOBRP1ClHtJ94zJYlan7fW8ZWrSmxY6eYvf96Ricm5ToBbpib3Kia5R5yZmKia38sqzP7BJDmeeGLYY2Xrj4ZU9icpA/0?wx_fmt=jpeg'
 welcomeDescription = ('''
 我们非常聪明的机器人可以回答你很多问题啦～\n
-【新闻】【天气】【快递】【笑话】【图片】【故事】
-【菜谱】【聊天】【问答】【百科】【飞机】【火车】
+【新闻】【天气】【快递】【翻译】【笑话】
+【菜谱】【聊天】【百科】【飞机】【火车】
+【图片】【故事】【问答】【星座】【计算】
 想听笑话，试试给我说 “讲个笑话呗”\n
 想查天气，试试给我说“苏州今天天气怎么样”\n
 想看新闻，试试给我说“刘德华的新闻”\n
 想做新菜，试试给我说 “回锅肉”\n
 想查快递，试试告诉我 “顺丰＋ 快递号”\n
 回复【功能】或【帮助】 获得相关信息.\n
-欢迎大家使用，更多功能正在开发中，敬请期待！\n
-请将宝贵意见发给我<格式  建议:xxxxxxxxxxxxxx>.
+欢迎大家使用，更多功能正在开发，敬请期待！\n
+请将宝贵意见发给我<格式  建议:xxxxx>.
 ''')
 detailUrl = ''
 
