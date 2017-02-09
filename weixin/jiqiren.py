@@ -1,7 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import json, urllib
+import md5
 import random
+import re
 from urllib import urlencode
  
 #----------------------------------
@@ -20,6 +22,9 @@ def main(question,userid):
  
 #问答
 def getAnswerByAI(query,userid, m="GET"):
+    m1 = md5.new()
+    m1.update(userid)
+    userid = m1.hexdigest()
     params = {
         "key" : appkey, #您申请到的本接口专用的APPKEY
         "info" : query, #要发送给机器人的内容，不要超过30个字符
@@ -29,8 +34,8 @@ def getAnswerByAI(query,userid, m="GET"):
         "lat" : "", #纬度，北纬40.234632（小数点后保留6位），需要写为40234632
         "userid" : userid, #1~32位，此userid针对您自己的每一个用户，用于上下文的关联 
     }
-    print 'getAnswerByAI ===== userid : ', userid
-    print params
+    print ' md5(userid) : ', userid
+
     params = urlencode(params)
     if m =="GET":
         f = urllib.urlopen("%s?%s" % (apiurl, params))
@@ -110,6 +115,11 @@ def getAnswerByAI(query,userid, m="GET"):
     print result
     return result
  
-# if __name__ == '__main__':
-#     query = raw_input("请输入你的问题: ")
-#     main(query,'userid')
+if __name__ == '__main__':
+    query = raw_input("请输入你的问题: ")
+    temp = 'oiHh-xLFRBT0MqRqFM_iNMFVtRx4'
+    # m1 = md5.new()
+    # m1.update(temp)
+    # sign = m1.hexdigest()
+    # print sign
+    main(query, temp)
