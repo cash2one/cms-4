@@ -19,7 +19,7 @@ def main(question,userid):
  
  
 #问答
-def getAnswerByAI(query,userid, m="GET"):    
+def getAnswerByAI(query,userid, m="GET"):
     params = {
         "key" : appkey, #您申请到的本接口专用的APPKEY
         "info" : query, #要发送给机器人的内容，不要超过30个字符
@@ -28,7 +28,9 @@ def getAnswerByAI(query,userid, m="GET"):
         "lon" : "", #经度，东经116.234632（小数点后保留6位），需要写为116234632
         "lat" : "", #纬度，北纬40.234632（小数点后保留6位），需要写为40234632
         "userid" : userid, #1~32位，此userid针对您自己的每一个用户，用于上下文的关联 
-    }  
+    }
+    print 'getAnswerByAI ===== userid : ', userid
+    print params
     params = urlencode(params)
     if m =="GET":
         f = urllib.urlopen("%s?%s" % (apiurl, params))
