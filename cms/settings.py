@@ -198,7 +198,7 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
-            os.path.join(PROJECT_ROOT, "solid/templates"),
+            os.path.join(PROJECT_ROOT, "flat/templates"),
             os.path.join(PROJECT_ROOT, "templates")
         ],
         "APP_DIRS": True,
@@ -232,7 +232,7 @@ if DJANGO_VERSION < (1, 9):
 
 INSTALLED_APPS = (
     "weixin",
-    "solid",
+    "flat",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
