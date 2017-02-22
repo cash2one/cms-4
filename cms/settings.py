@@ -198,7 +198,7 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
-            os.path.join(PROJECT_ROOT, "moderna/templates"),
+            os.path.join(PROJECT_ROOT, "nova/templates"),
             os.path.join(PROJECT_ROOT, "templates")
         ],
         "APP_DIRS": True,
@@ -232,6 +232,7 @@ if DJANGO_VERSION < (1, 9):
 
 INSTALLED_APPS = (
     "weixin",
+    "nova",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
